@@ -1,0 +1,45 @@
+EpuckInterface.hpp	abstrakte Klasse fuer alle Epucks
+Epuck.hpp		Standard-Implementierung des EpuckInterface
+EpuckDummy		Simulation ohne Epuck
+
+EpuckBt:	non-blocking Bluetooth kommando-Methode ( linux only )
+EpuckBtBlock:	blocking Bluetooth kommando-Methode
+EpuckBtLook:	Bluetooth lookup for an epuck. linux only. to be superseeded by epuck-lister.
+
+if_block:	blocking i/o mit bekannten antworten ( win & linux )
+if_nonblock:	nonblocking i/o mit probiertem timing ( nur linux )
+
+Typen
+-----
+
+EpuckTypes:	einige Hilfstypen
+EpuckImage:	fuer die Kamerabilder
+EpuckList:	bekannte Nummern mit Bluetooth-Adressen
+
+Bluetooth:
+----------
+
+EpuckLook:	Bluetooth-Adresse anhand er Epuck-ID finden
+
+EpuckBt:	non-blocking Bluetooth kommando-Methode
+BtConn:		connection and non-blocking i/o
+BtConnBlock:	connection and blocking i/o
+BtSocket:	non-blocking socket abstraction
+BtSocketBlock:	blocking socket abstraction
+
+
+Entscheidungen:
+1. ascii oder binär -> alles ascii außer bilder
+2. (linux) rfcomm oder socket	-> socket
+3. (socket) blocking oder nonblocking
+
+Kommunikation mit dem Epuck
+
+     Kommando
+    /	    \
+rfcomm	  BtSocket
+      \	    /
+Bluetooth-Dongle
+	  |
+	Epuck
+rfcomm-interface bauen.
